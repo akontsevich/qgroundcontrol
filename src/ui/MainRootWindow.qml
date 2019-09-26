@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  *   (c) 2009-2016 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -20,6 +20,7 @@ import QGroundControl.Controls      1.0
 import QGroundControl.ScreenTools   1.0
 import QGroundControl.FlightDisplay 1.0
 import QGroundControl.FlightMap     1.0
+
 
 /// Native QML top level window
 ApplicationWindow {
@@ -78,11 +79,11 @@ ApplicationWindow {
         analyzeWindow.visible   = false
         flightView.visible      = false
         planViewLoader.visible  = false
-        if(isPlanView) {
-            toolbar.source  = _planToolbar
-        } else {
-            toolbar.source  = _mainToolbar
-        }
+//        if(isPlanView) {
+//            toolbar.source  = _planToolbar
+//        } else {
+//            toolbar.source  = _mainToolbar
+//        }
     }
 
     function showFlyView() {
@@ -242,31 +243,64 @@ ApplicationWindow {
     }
 
     //-------------------------------------------------------------------------
-    //-- Toolbar
-    header: ToolBar {
+    //-- Main Toolbar
+    header: MainToolbar {
+        id: topMenu
         height:         ScreenTools.toolbarHeight
         visible:        !QGroundControl.videoManager.fullScreen
-        background:     Rectangle {
-            color:      qgcPal.globalTheme === QGCPalette.Light ? QGroundControl.corePlugin.options.toolbarBackgroundLight : QGroundControl.corePlugin.options.toolbarBackgroundDark
-        }
-        Loader {
-            id:             toolbar
-            anchors.fill:   parent
-            source:         _mainToolbar
-            //-- Toggle Full Screen / Windowed
-            MouseArea {
-                anchors.fill:   parent
-                enabled:        !ScreenTools.isMobile
-                onDoubleClicked: {
-                    if(mainWindow.visibility === Window.Windowed) {
-                        mainWindow.showFullScreen()
-                    } else {
-                        mainWindow.showNormal()
-                    }
-                }
-            }
-        }
+        z: 1
     }
+
+    FontMetrics {
+        id: fontMetrics
+        font.family: "Arial"
+        font.pixelSize: 18
+    }
+
+    // Settings page
+    Loader {
+        id: settingsPageLoader
+        anchors {
+            left: leftMenu.right;
+            top: leftMenu.top;
+            bottom: leftMenu.bottom
+            right: parent.right
+            leftMargin: 1
+        }
+        z: 1
+    }
+
+    // Left Toolbar
+    LeftToolbar {
+        id: leftMenu
+        anchors { top: topMenu.bottom; bottom: parent.bottom; topMargin: 1 }
+        z: 1
+    }
+
+    //    header: ToolBar {
+//        height:         ScreenTools.toolbarHeight
+//        visible:        !QGroundControl.videoManager.fullScreen
+//        background:     Rectangle {
+//            color:      qgcPal.globalTheme === QGCPalette.Light ? QGroundControl.corePlugin.options.toolbarBackgroundLight : QGroundControl.corePlugin.options.toolbarBackgroundDark
+//        }
+//        Loader {
+//            id:             toolbar
+//            anchors.fill:   parent
+//            source:         toolbar.source
+//            //-- Toggle Full Screen / Windowed
+//            MouseArea {
+//                anchors.fill:   parent
+//                enabled:        !ScreenTools.isMobile
+//                onDoubleClicked: {
+//                    if(mainWindow.visibility === Window.Windowed) {
+//                        mainWindow.showFullScreen()
+//                    } else {
+//                        mainWindow.showNormal()
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     footer: LogReplayStatusBar {
         visible: QGroundControl.settingsManager.flyViewSettings.showLogReplayStatusBar.rawValue

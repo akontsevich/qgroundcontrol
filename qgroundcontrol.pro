@@ -31,7 +31,11 @@ DebugBuild {
     DESTDIR  = $${OUT_PWD}/release
 }
 
-QML_IMPORT_PATH += $$PWD/src/QmlControls
+QML_IMPORT_PATH += \
+    $$PWD/src/QmlControls \
+    $$PWD/src/ui \
+    $$PWD/src/ui/toolbar \
+    $$PWD/src/ui/preferences
 
 #
 # OS Specific settings
