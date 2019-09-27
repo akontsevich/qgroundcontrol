@@ -2,6 +2,11 @@
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 
+import QGroundControl                       1.0
+import QGroundControl.SettingsManager       1.0
+import QGroundControl.FactSystem            1.0
+import QGroundControl.FactControls          1.0
+
 Item {
     anchors.fill: parent
     FontMetrics {
@@ -17,41 +22,23 @@ Item {
 
         ListModel {
             id: unitsModel
-            ListElement {
-                text: qsTr("Distance")
-                units: [
-                    ListElement{ unit: "Feet"},
-                    ListElement{ unit: "Meters"}
-                ]
-            }
-            ListElement {
-                text: qsTr("Altitude");
-                units: [
-                    ListElement{ unit: "Feet"},
-                    ListElement{ unit: "Meters"},
-                    ListElement{ unit: "Kilometers"}
-                ]
-            }
-            ListElement {
-                text: qsTr("Area");
-                units: [
-                    ListElement{ unit: "SquareFeet"},
-                    ListElement{ unit: "SquareMeters"},
-                    ListElement{ unit: "SquareKilometers"},
-                    ListElement{ unit: "Hectares"},
-                    ListElement{ unit: "Acres"},
-                    ListElement{ unit: "SquareMiles"}
-                ]
-            }
-            ListElement {
-                text: qsTr("Speed");
-                units: [
-                    ListElement{ unit: "Feet/second"},
-                    ListElement{ unit: "Meters/second"},
-                    ListElement{ unit: "Miles/hour"},
-                    ListElement{ unit: "Kilometers/hour"},
-                    ListElement{ unit: "Knots"}
-                ]
+            Component.onCompleted: {
+                append({
+                    text: qsTr("Distance"),
+                    units: QGroundControl.settingsManager.unitsSettings.distanceUnits
+                })
+                append({
+                    text: qsTr("Altitude"),
+                    units: QGroundControl.settingsManager.unitsSettings.distanceUnits
+                })
+                append({
+                    text: qsTr("Area"),
+                    units: QGroundControl.settingsManager.unitsSettings.areaUnits
+                })
+                append({
+                    text: qsTr("Speed"),
+                    units: QGroundControl.settingsManager.unitsSettings.speedUnits
+                })
             }
         }
 
@@ -101,7 +88,7 @@ Item {
                     UnitsCombobox {
                         anchors.left: parent.left
                         anchors.leftMargin: 8
-                        model: units
+                        fact: units
                         width: element.width / 2
                         font: fontMetrics.font
                     }

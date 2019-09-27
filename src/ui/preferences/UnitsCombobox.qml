@@ -1,8 +1,28 @@
 ﻿import QtQuick 2.12
 import QtQuick.Controls 2.12
 
+import QGroundControl.FactSystem 1.0
+import QGroundControl.Palette 1.0
+import QGroundControl.Controls 1.0
+
 ComboBox {
     id: control
+
+    property Fact fact: Fact { }
+    property bool indexModel: true  ///< true: model must be specifed, selected index is fact value,
+                                    ///  false: use enum meta data
+
+    model: fact ? fact.enumStrings : null
+
+    currentIndex: fact ? (indexModel ? fact.value : fact.enumIndex) : 0
+
+    onActivated: {
+        if (indexModel) {
+            fact.value = index
+        } else {
+            fact.value = fact.enumValues[index]
+        }
+    }
 
     delegate: ItemDelegate {
         width: control.width
@@ -14,7 +34,7 @@ ComboBox {
             verticalAlignment: Text.AlignVCenter
         }
         background: Rectangle {
-            color: control.currentIndex === index ? "#ffffc8" : "white"
+            color: control.currentIndex === index ? "#eecc44" : "white"
         }
 
         MouseArea {
