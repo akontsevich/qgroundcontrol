@@ -1,10 +1,12 @@
 ﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 
+import QGroundControl.ScreenTools           1.0
+
 Rectangle {
     id: topMenu
     z: 1
-    height: fontMetrics.height * 3
+    height: ScreenTools.defaultFontPixelHeight * 3
     width: parent.width
     color: "black"
     Image {

@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import QGroundControl.FactSystem 1.0
 import QGroundControl.Palette 1.0
 import QGroundControl.Controls 1.0
+import QGroundControl.ScreenTools           1.0
 
 ComboBox {
     id: control

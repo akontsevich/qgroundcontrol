@@ -2,6 +2,8 @@
 import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
 
+import QGroundControl.ScreenTools           1.0
+
 Rectangle { // Custom drawer
     id: leftMenu
     x: -width
@@ -38,7 +40,7 @@ Rectangle { // Custom drawer
             property alias cursorShape: buttonMouseArea.cursorShape
             cursorShape: Qt.PointingHandCursor
             anchors { left: parent.left; right: parent.right }
-            height: fontMetrics.height * 3
+            height: ScreenTools.defaultFontPixelHeight * 3
             checkable: true
             text: model.text;
             enabled: true
@@ -59,7 +61,7 @@ Rectangle { // Custom drawer
 
             contentItem: Row {
                 id: row
-                spacing: fontMetrics.averageCharacterWidth * 2
+                spacing: ScreenTools.defaultFontPixelHeight * 2
                 Image {
                     source: model.icon
                     anchors.verticalCenter: parent.verticalCenter
@@ -71,7 +73,7 @@ Rectangle { // Custom drawer
                 }
                 Text {
                     text: model.text
-                    font: fontMetrics.font
+                    font.pixelSize: ScreenTools.defaultFontPixelHeight
                     anchors.verticalCenter: parent.verticalCenter
                     color: parent.parent.hovered ? "#00ffc8" : "white"
                 }

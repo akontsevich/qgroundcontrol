@@ -251,12 +251,6 @@ ApplicationWindow {
         z: 1
     }
 
-    FontMetrics {
-        id: fontMetrics
-        font.family: "Arial"
-        font.pixelSize: 18
-    }
-
     // Settings page
     Loader {
         id: settingsPageLoader

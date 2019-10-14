@@ -6,14 +6,10 @@ import QGroundControl                       1.0
 import QGroundControl.SettingsManager       1.0
 import QGroundControl.FactSystem            1.0
 import QGroundControl.FactControls          1.0
+import QGroundControl.ScreenTools           1.0
 
 Item {
     anchors.fill: parent
-    FontMetrics {
-        id: fontMetrics
-        font.family: "Arial"
-        font.pixelSize: 18
-    }
 
     Rectangle {
         id: unitsPage
@@ -56,14 +52,14 @@ Item {
             header: Item {
                 id: header
                 width: settingsView.width
-                height: fontMetrics.height * 3
+                height: ScreenTools.defaultFontPixelHeight * 3
 
                 Text {
                     color: "grey"
                     text: qsTr("UNITS")
                     anchors.left: parent.left
                     anchors.leftMargin: 8
-                    font: fontMetrics.font
+                    font.pixelSize: ScreenTools.defaultFontPixelHeight
                     anchors.verticalCenter: parent.verticalCenter
                 }
                 HorizontalSeparator { }
@@ -72,10 +68,10 @@ Item {
             delegate: Item {
                 id: element
                 width: settingsView.width
-                height: fontMetrics.height * 5
+                height: ScreenTools.defaultFontPixelHeight * 5
 
                 Column {
-                    anchors.topMargin: fontMetrics.height
+                    anchors.topMargin: ScreenTools.defaultFontPixelHeight
                     anchors.verticalCenter: parent.verticalCenter
                     spacing: 8
                     Text {
@@ -83,14 +79,14 @@ Item {
                         text: model.text
                         anchors.left: parent.left
                         anchors.leftMargin: 8
-                        font: fontMetrics.font
+                        font.pixelSize: ScreenTools.defaultFontPixelHeight
                     }
                     UnitsCombobox {
                         anchors.left: parent.left
                         anchors.leftMargin: 8
                         fact: units
                         width: element.width / 2
-                        font: fontMetrics.font
+                        font.pixelSize: ScreenTools.defaultFontPixelHeight
                     }
                 }
 
