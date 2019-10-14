@@ -44,7 +44,7 @@ Item {
                 top: parent.top;
                 horizontalCenter: parent.horizontalCenter
             }
-            width: parent.width * 0.85
+            width: parent.width * 0.9
             height: parent.height
 
             model: unitsModel
@@ -60,6 +60,7 @@ Item {
                     anchors.left: parent.left
                     anchors.leftMargin: 8
                     font.pixelSize: ScreenTools.defaultFontPixelHeight
+                    font.bold: true
                     anchors.verticalCenter: parent.verticalCenter
                 }
                 HorizontalSeparator { }
