@@ -61,10 +61,16 @@ Rectangle { // Custom drawer
 
             contentItem: Row {
                 id: row
-                spacing: ScreenTools.defaultFontPixelHeight * 2
+                spacing: ScreenTools.defaultFontPixelHeight
+                leftPadding: ScreenTools.defaultFontPixelHeight
+                rightPadding: ScreenTools.defaultFontPixelHeight
                 Image {
                     source: model.icon
                     anchors.verticalCenter: parent.verticalCenter
+                    width: ScreenTools.defaultFontPixelHeight
+                    height: ScreenTools.defaultFontPixelHeight
+                    fillMode: Image.PreserveAspectFit
+
                     ColorOverlay {
                         anchors.fill: parent
                         source: parent
